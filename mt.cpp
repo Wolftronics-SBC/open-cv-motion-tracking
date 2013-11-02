@@ -67,21 +67,11 @@ void detectAndDisplay(Mat frame) {
   // Blur the frame to filter some noise
   blur(grey, blurred, Size(blur_size, blur_size));
 
-  //imshow("blurred", blurred);
-  //imshow("grey", grey);
-
   Mat element = getStructuringElement(MORPH_CROSS, Size(3, 3), Point(1, 1));
   /// Apply the erosion operation
   erode(blurred, eroded, element);
-
-  imshow("Erroded before", eroded);
-
-  //addWeighted(prev, 0.7, eroded, 1, 0, eroded);
-
+  // BW treshold
   threshold(eroded, bw, 7, 255, 0);
-
-  imshow("Erroded after", bw);
-
   // Edge filter
   Canny(bw, canny, tresh, tresh*3, 3);
 
